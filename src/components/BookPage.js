@@ -9,7 +9,7 @@ export class BookPage extends Component {
   }
 
   componentDidMount() {
-    axios.get(`/wp-json/wp/v2/books/${this.props.match.params.id}`)
+    axios.get(`http://localhost:8888/wp-json/wp/v2/books/${this.props.match.params.id}`)
       .then(res => this.setState({
         book: res.data,
         isLoaded: true

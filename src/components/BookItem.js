@@ -16,8 +16,8 @@ export class BookItem extends Component {
 
   componentDidMount() {
     const { featured_media, author } = this.props.book;
-    const getImageUrl = axios.get(`/wp-json/wp/v2/media/${featured_media}`);
-    const getAuthor = axios.get(`/wp-json/wp/v2/users/${author}`);
+    const getImageUrl = axios.get(`http://localhost:8888/wp-json/wp/v2/media/${featured_media}`);
+    const getAuthor = axios.get(`http://localhost:8888/wp-json/wp/v2/users/${author}`);
 
     Promise.all([getImageUrl, getAuthor]). then(res => {
         this.setState({
@@ -31,20 +31,22 @@ export class BookItem extends Component {
   render() {
     const { id, title, excerpt } = this.props.book;
     const { author, imgUrl, isLoaded } = this.state;
-    if(isLoaded) {
-        return (
-        <div>
-            <h2 style={{ marginBottom: '0' }}>{title.rendered}</h2>
-            <small>Review by <strong>{ author }</strong></small>
-            <img 
-                style = {{ width: '100%' }} 
-                src={ imgUrl } 
-                alt={title.rendered}
-            />
-            <div dangerouslySetInnerHTML={{ __html: excerpt.rendered }} />
-            <Link to={`/book/${id}`}>Read Review</Link>
-            <hr />
-        </div>
+    if (isLoaded) {
+          return (
+          <div>
+              <h2 style={{ marginBottom: '0' }}>{title.rendered}</h2>
+              <small>
+                Review by <strong>{author}</strong>
+              </small>
+              <img 
+                  style = {{ width: '100%' }} 
+                  src={imgUrl} 
+                  alt={title.rendered}
+              />
+              <div dangerouslySetInnerHTML={{ __html: excerpt.rendered }} />
+              <Link to={`http://localhost:8888/book/${id}`}>Read Review</Link>
+              <hr />
+          </div>
         );
     }
 

@@ -8,7 +8,7 @@ export class Books extends Component {
         isLoaded: false
     }
 componentDidMount() {
-    axios.get('/wp-json/wp/v2/books')
+    axios.get('http://localhost:8888/wp-json/wp/v2/books')
         .then(res => this.setState({
             books: res.data,
             isLoaded: true
@@ -23,7 +23,7 @@ componentDidMount() {
         <div>
           { books.map(book => (
             <BookItem key={book.id} book={book} />
-          )) }
+          ))}
         </div>
       );
     } 
